@@ -4,29 +4,42 @@ import com.github.neilyich.expressionskt.evaluator.Evaluator
 import com.github.neilyich.expressionskt.evaluator.evaluationsuitability.EvaluationSuitabilityProvider
 import com.github.neilyich.expressionskt.evaluator.typeconverter.TypeConverter
 import com.github.neilyich.expressionskt.expression.Expression
+import com.github.neilyich.expressionskt.expression.compiler.CompiledExpression
 import com.github.neilyich.expressionskt.expression.compiler.ExpressionCompiler
 import com.github.neilyich.expressionskt.expression.compiler.SimpleExpressionCompiler
+import com.github.neilyich.expressionskt.expression.evaluator.CompiledExpressionEvaluator
+import com.github.neilyich.expressionskt.expression.evaluator.DelegatingExpressionEvaluator
 import com.github.neilyich.expressionskt.expression.evaluator.ExpressionEvaluator
 import com.github.neilyich.expressionskt.expression.evaluator.SimpleExpressionEvaluator
+import com.github.neilyich.expressionskt.expression.evaluator.provider.ComparingEvaluatorProvider
+import com.github.neilyich.expressionskt.expression.evaluator.provider.EvaluatorProvider
 import com.github.neilyich.expressionskt.parser.ExpressionParser
 import com.github.neilyich.expressionskt.parser.SimpleExpressionParser
-import com.github.neilyich.expressionskt.token.Constant
-import com.github.neilyich.expressionskt.token.Operand
-import com.github.neilyich.expressionskt.token.Operator
-import com.github.neilyich.expressionskt.token.NamedVariable
+import com.github.neilyich.expressionskt.token.*
 import java.util.LinkedList
 
 class ExpressionsContextImpl(
-    private val suitabilityProvider: EvaluationSuitabilityProvider
+    private val suitabilityProvider: EvaluationSuitabilityProvider,
+    private val evaluatorProvider: EvaluatorProvider
 ) : ExpressionsContext {
 
-    private val operatorEvaluators = mutableMapOf<Operator, MutableList<Evaluator<*>>>()
+    private val operators = mutableSetOf<Operator>()
 
     private val variables = mutableMapOf<String, Operand<*>>()
 
+    private val compiler = SimpleExpressionCompiler(evaluatorProvider, suitabilityProvider)
+
+    private val parser = SimpleExpressionParser(operators, variables)
+
+    private val expressionEvaluator: ExpressionEvaluator<Expression> = SimpleExpressionEvaluator(evaluatorProvider, suitabilityProvider)
+
+    private val compiledExpressionEvaluator: ExpressionEvaluator<CompiledExpression> = CompiledExpressionEvaluator(suitabilityProvider)
+
+    private val evaluator = DelegatingExpressionEvaluator(expressionEvaluator, compiledExpressionEvaluator)
+
     override fun register(operator: Operator, evaluator: Evaluator<*>) {
-        val evaluators = operatorEvaluators.getOrPut(operator) { LinkedList() }
-        evaluators.add(evaluator)
+        operators.add(operator)
+        evaluatorProvider.register(operator, evaluator)
     }
 
     override fun <From : Any, To : Any> register(typeConverter: TypeConverter<From, To>) {
@@ -41,14 +54,17 @@ class ExpressionsContextImpl(
         variables[name] = Constant(value, valueClass)
     }
 
-    override fun <V : Any> setVariableAsExpression(name: String, expr: String, valueClass: Class<V>) {
-        val expression = parse(expr)
-        variables[name] = NamedVariable("expr_$name", { evaluate(expression, valueClass) }) { valueClass }
+    override fun <V : Any> setVariableAsExpression(name: String, expression: Expression, valueClass: Class<V>) {
+        variables[name] = Variable({ evaluate(expression, valueClass) }) { valueClass }
     }
 
-    override fun createEvaluator(): ExpressionEvaluator<Expression> = SimpleExpressionEvaluator(operatorEvaluators, suitabilityProvider)
+    override fun <V : Any> setVariableAsExpression(name: String, expr: String, valueClass: Class<V>) {
+        setVariableAsExpression(name, compile(expr), valueClass)
+    }
 
-    override fun createParser(): ExpressionParser = SimpleExpressionParser(operatorEvaluators.keys, variables)
+    override fun evaluator(): ExpressionEvaluator<Expression> = evaluator
 
-    override fun createCompiler(): ExpressionCompiler = SimpleExpressionCompiler(operatorEvaluators, suitabilityProvider)
+    override fun parser(): ExpressionParser = parser
+
+    override fun createCompiler(): ExpressionCompiler = compiler
 }

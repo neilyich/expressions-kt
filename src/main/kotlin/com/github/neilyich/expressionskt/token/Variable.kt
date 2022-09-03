@@ -8,4 +8,8 @@ open class Variable<V: Any>(private val valueSupplier: Supplier<V?>, private val
 
     final override fun valueClass(): Class<in V> = valueClassSupplier.get()
 
+    override fun toString(): String {
+        return "Variable [${valueClass().simpleName}]"
+    }
+
 }

@@ -1,25 +1,18 @@
 package com.github.neilyich.expressionskt.expression.evaluator
 
-import com.github.neilyich.expressionskt.evaluator.Evaluator
 import com.github.neilyich.expressionskt.evaluator.args.OperandsHolder
-import com.github.neilyich.expressionskt.evaluator.args.TypeConvertingOperandsHolder
 import com.github.neilyich.expressionskt.evaluator.evaluationsuitability.EvaluationSuitabilityProvider
-import com.github.neilyich.expressionskt.evaluator.impl.decimal
-import com.github.neilyich.expressionskt.evaluator.impl.integer
 import com.github.neilyich.expressionskt.expression.Expression
-import com.github.neilyich.expressionskt.expression.compiler.CompiledExpression
+import com.github.neilyich.expressionskt.expression.evaluator.provider.EvaluatorProvider
 import com.github.neilyich.expressionskt.token.*
-import java.math.BigDecimal
-import java.math.BigInteger
 import kotlin.collections.ArrayDeque
 
 class SimpleExpressionEvaluator(
-    private val operatorsEvaluators: Map<Operator, List<Evaluator<*>>>,
+    private val evaluatorProvider: EvaluatorProvider,
     private val suitabilityProvider: EvaluationSuitabilityProvider
 ) : ExpressionEvaluator<Expression> {
 
     override fun <R : Any> evaluate(expression: Expression, resultClass: Class<R>): R {
-        if (expression is CompiledExpression) return CompiledExpressionEvaluator(suitabilityProvider).evaluate(expression, resultClass)
         val operators = ArrayDeque<OperatorPriority>()
         val operands = ArrayDeque<Operand<*>>()
         val tokens = expression.content()
@@ -65,15 +58,7 @@ class SimpleExpressionEvaluator(
 
     private fun evaluateOperator(operator: Operator, operands: ArrayDeque<Operand<*>>) {
         val operandsHolder = OperandsHolder.forOperands(operands.subList(0, operator.operandsCount).reversed())
-        val (evaluator, suitability) = operatorsEvaluators[operator]?.let {
-            it.map { ev ->
-                ev to ev.suitabilityFor(operandsHolder, suitabilityProvider)
-            }.filter { ev ->
-                ev.second.isSuitable
-            }.maxByOrNull { ev ->
-                ev.first.suitabilityFor(operandsHolder, suitabilityProvider)
-            }
-        } ?: throw RuntimeException("Unable to evaluate expression for operator: $operator, operands: $operandsHolder, ${operandsHolder.operands().map { it.valueClass() }}")
+        val (evaluator, suitability) = evaluatorProvider.findBestEvaluator(operator, operandsHolder, suitabilityProvider)
         //println("$operator: $operandsHolder, ${evaluator.javaClass.simpleName}, ${suitability.typeConverters.map { it.javaClass.simpleName }}")
         val result = evaluator.evaluate(OperandsHolder.withTypeConverters(operandsHolder, suitability.typeConverters), suitabilityProvider)
         for (i in 0 until operator.operandsCount) {
