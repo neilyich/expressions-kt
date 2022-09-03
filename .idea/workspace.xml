@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="294e56c3-4149-4337-8787-10f69fc1421c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/Application.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContext.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContextImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/BinaryEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/BinaryValuesEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/Evaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/FunctionEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/FunctionValuesEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/NoArgsEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/NoArgsValueEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/UnaryEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/UnaryValueEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/EmptyOperandsHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/OperandsEnumerationHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/OperandsHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/SimpleOperandsHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/TypeConvertingOperandsHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/evaluationsuitability/BasicEvaluationSuitabilityProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/evaluationsuitability/EvaluationSuitability.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/evaluationsuitability/EvaluationSuitabilityProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/evaluationsuitability/TypeConvertingEvaluationSuitabilityProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/NumberUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/CosEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MathFunctionEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MaxEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MinEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/NowEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/SinEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/TanEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/BinaryNumbersEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/DivEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/FactorialEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/MinusEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/MultEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/PlusEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/PowEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/UnaryMinusEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/UnaryNumberEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/typeconverter/CastingTypeConverter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/typeconverter/NumberToBigDecimalConverter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/typeconverter/NumberToBigIntegerConverter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/typeconverter/TypeConverter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/Expression.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/SimpleExpression.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/CompiledExpression.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/ExpressionCompiler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/SimpleExpressionCompiler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/task/AddOperandToStack.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/task/AddOperatorToStack.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/task/CompiledTask.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/task/EvaluationTask.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/CompiledExpressionEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/ExpressionEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/OperatorPriority.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/SimpleExpressionEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ExpressionParser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ParseException.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ParseState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/SimpleExpressionParser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/BinaryOperator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/CloseBracket.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Comma.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Constant.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/ExpressionToken.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/FunctionCall.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/NamedVariable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/OpenBracket.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Operand.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/OperandsEnumeration.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Operator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/UnaryOperator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/UnaryPostfixOperator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/UnaryPrefixOperator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Variable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/OperatorPriorities.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/CommaEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/IdentityEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Cos.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Max.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Min.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Now.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Sin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/Tan.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Div.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Factorial.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Minus.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Mult.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Plus.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/Pow.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/UnaryMinus.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Sealed Interface" />
+        <option value="Kotlin Object" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DxLvnW2P1fm00jQTOGcdFgEhpb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.google.cloudcode.ide_session_index": "20220903_0000",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="com.github.neilyich.expressionskt.expression.evaluator" />
+      <recent name="com.github.neilyich.expressionskt.expression.compiler" />
+      <recent name="com.github.neilyich.expressionskt.expression" />
+      <recent name="com.github.neilyich.expressionskt.evaluator" />
+      <recent name="com.github.neilyich.expressionskt.evaluator.typeconverter" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.github.neilyich.expressionskt.expression.compiler.task" />
+      <recent name="com.github.neilyich.expressionskt.expression.compiler" />
+      <recent name="com.github.neilyich.expressionskt.evaluator.evaluationsuitability" />
+      <recent name="com.github.neilyich.expressionskt.expression" />
+      <recent name="com.github.neilyich.expressionskt.token" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.github.neilyich.expressionskt.ApplicationKt" />
+      <module name="expressions-kt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.ApplicationKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="294e56c3-4149-4337-8787-10f69fc1421c" name="Changes" comment="" />
+      <created>1661636022684</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661636022684</updated>
+      <workItem from="1661636024035" duration="9425000" />
+      <workItem from="1661682248933" duration="40757000" />
+      <workItem from="1661775760975" duration="16928000" />
+      <workItem from="1661962872848" duration="17919000" />
+      <workItem from="1662025182314" duration="305000" />
+      <workItem from="1662051520625" duration="1110000" />
+      <workItem from="1662226549915" duration="1012000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
