@@ -10,7 +10,7 @@ class SimpleExpressionParser(private val operators: Set<Operator>, private val v
 
     override fun parse(expr_: String): Expression {
         val expr = expr_.replace(Regex("\\s+"), "")
-        val state = ParseState.initial()
+        val state = ValidatingParseState.initial()
         val tokens = ArrayList<ExpressionToken>()
         var currentIndex = 0
         while (currentIndex < expr.length) {
@@ -25,25 +25,30 @@ class SimpleExpressionParser(private val operators: Set<Operator>, private val v
                         tokens.add(Comma)
                     }
                 } else if (lastToken is NamedVariable<*> && nextToken is OpenBracket) {
-                    state.stepBack()
                     tokens.removeLast()
                     nextToken = FunctionCall(lastToken.name)
+                    state.reset()
                 }
             }
             currentIndex = nexTokenInfo.first
-            state.submit(nextToken)
+            state.submitAndValidate(nextToken)
             tokens.add(nextToken)
         }
+        state.validateTotal()
         return SimpleExpression(tokens)
     }
 
-    private fun nextToken(expr: String, startIndex: Int, state: ParseState): Pair<Int, ExpressionToken?> {
+    private fun nextToken(expr: String, startIndex: Int, state: ValidatingParseState): Pair<Int, ExpressionToken?> {
         var token: ExpressionToken? = null
         var endIndex = startIndex + 1
         if (expr[startIndex].isJavaIdentifierStart()) {
             while (endIndex < expr.length && expr[endIndex].isJavaIdentifierPart()) { endIndex++ }
             val javaId = expr.substring(startIndex, endIndex)
-            return endIndex to NamedVariable(javaId, { variablesContainer[javaId]?.value() }) { variablesContainer[javaId]?.valueClass() as Class<Any> }
+            return endIndex to NamedVariable(javaId, {
+                variablesContainer[javaId]?.value() ?: unknownVariable(javaId)
+            }) {
+                (variablesContainer[javaId]?.valueClass() ?: unknownVariable(javaId)) as Class<Any>
+            }
         } else if (expr[startIndex].isDigit()) {
             while (endIndex < expr.length && expr[endIndex].isDigit()) { endIndex++ }
             if (endIndex < expr.length && expr[endIndex] == '.') {
@@ -64,7 +69,7 @@ class SimpleExpressionParser(private val operators: Set<Operator>, private val v
             while (endIndex < expr.length && candidates.size != 1 && (!expr[endIndex].isJavaIdentifierStart() && !expr[endIndex].isDigit())) {
                 endIndex++
                 opStr = expr.substring(startIndex, endIndex)
-                candidates = operators.filter { it.str != opStr }.filter { state.expectedTokens.contains(it.javaClass) }.toSet()
+                candidates = operators.filter { it.str != opStr }.filter { state.isTokenExpected(it) }.toSet()
             }
             if (candidates.size == 1) {
                 token = candidates.first()
@@ -72,4 +77,6 @@ class SimpleExpressionParser(private val operators: Set<Operator>, private val v
         }
         return endIndex to token
     }
+
+    private fun unknownVariable(name: String): Nothing = throw RuntimeException("Unknown Variable: $name")
 }

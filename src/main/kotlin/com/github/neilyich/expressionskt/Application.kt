@@ -2,6 +2,7 @@ package com.github.neilyich.expressionskt
 
 import com.github.neilyich.expressionskt.evaluator.BinaryValuesEvaluator
 import com.github.neilyich.expressionskt.evaluator.FunctionValuesEvaluator
+import com.github.neilyich.expressionskt.evaluator.impl.compareTo
 import com.github.neilyich.expressionskt.evaluator.impl.decimal
 import com.github.neilyich.expressionskt.evaluator.impl.functions.numbers.NowEvaluator
 import com.github.neilyich.expressionskt.evaluator.typeconverter.TypeConverter
@@ -22,6 +23,9 @@ class Test {
 
 fun main() {
     val c = ExpressionsContext.createDefault()
+    println(c.evaluate(""))
+
+    if (true) return
 
 //    c.register(object : TypeConverter<Number, BigInteger> {
 //        override fun convert(value: Number): BigInteger {
@@ -53,14 +57,20 @@ fun main() {
     })
     c.register(Now, NowEvaluator)
     c.registerVariable("x", Double::class.javaObjectType)
-    val e = c.compile("(1 + 2 * (3 + 4) + cos(x) * sin(x) - tan(x) / now()) * (1 + 2 * (3 + 4) + cos(x) * sin(x) - tan(x) / now())")
+    //c.setVariableAsExpression("y", "1 + 2 * (3 + 4) + cos(x) * sin(x) - tan(x) / now()", BigDecimal::class.java)
+    val e = c.parse("1 + (2)) * 4")
+    //val e1 = c.parse("(1 + 2 * (3 + 4) + cos(x) * sin(x) - tan(x) / now()) * (1 + 2 * (3 + 4) + cos(x) * sin(x) - tan(x) / now())")
     println(e.content())
     //val rr = mutableListOf<Any>()
     val start = System.currentTimeMillis()
     for (degree in 0 until 1_000_000) {
         val x = degree.toDouble() / 180.0 * Math.PI
         c.setVariable("x", x)
-        val r = c.evaluate(e)
+        val r = c.evaluate(e, BigDecimal::class.java)
+//        val r1 = c.evaluate(e1, BigDecimal::class.java)
+//        if ((r1 - r).abs() > BigDecimal("0.01")) {
+//            throw RuntimeException("$r != $r1, x=$x")
+//        }
         //rr.add(c.evaluate(e))
     }
     val end = System.currentTimeMillis()

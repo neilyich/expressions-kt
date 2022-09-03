@@ -9,12 +9,14 @@ import com.github.neilyich.expressionskt.expression.compiler.task.AddOperatorToS
 import com.github.neilyich.expressionskt.expression.compiler.task.CompiledTask
 import com.github.neilyich.expressionskt.expression.compiler.task.EvaluationTask
 import com.github.neilyich.expressionskt.expression.evaluator.OperatorPriority
+import com.github.neilyich.expressionskt.expression.evaluator.provider.EvaluatorProvider
 import com.github.neilyich.expressionskt.token.*
 import com.github.neilyich.expressionskt.token.operator.evaluators.CommaEvaluator
 import com.github.neilyich.expressionskt.token.operator.evaluators.IdentityEvaluator
+import java.util.function.Supplier
 
 class SimpleExpressionCompiler(
-    private val operatorsEvaluators: Map<Operator, List<Evaluator<*>>>,
+    private val evaluatorProvider: EvaluatorProvider,
     private val suitabilityProvider: EvaluationSuitabilityProvider
 ) : ExpressionCompiler {
     override fun compile(expression: Expression): CompiledExpression {
@@ -48,7 +50,10 @@ class SimpleExpressionCompiler(
         while (operators.isNotEmpty()) {
             evaluateOperator(operators.removeFirst().operator, operands, tasks)
         }
-        return CompiledExpression(tokens, tasks)
+        if (operands.size != 1) {
+            throw RuntimeException("Unexpected operands")
+        }
+        return CompiledExpression(tokens, operands.first() as Operand<Any>)
     }
 
     private fun processOperator(operatorPriority: OperatorPriority, operands: ArrayDeque<Operand<*>>, operators: ArrayDeque<OperatorPriority>, tasks: MutableList<CompiledTask>) {
@@ -60,34 +65,27 @@ class SimpleExpressionCompiler(
     }
 
     private fun evaluateOperator(operator: Operator, operands: ArrayDeque<Operand<*>>, tasks: MutableList<CompiledTask>) {
-        val operandsHolder = OperandsHolder.forOperands(operands.subList(0, operator.operandsCount).reversed())
-        val (evaluator, suitability) = operatorsEvaluators[operator]?.let {
-            it.map { ev ->
-                ev to ev.suitabilityFor(operandsHolder, suitabilityProvider)
-            }.filter { ev ->
-                ev.second.isSuitable
-            }.maxByOrNull { ev ->
-                ev.first.suitabilityFor(operandsHolder, suitabilityProvider)
-            }
-        } ?: throw RuntimeException("Unable to evaluate expression for operator: $operator, operands: $operandsHolder, ${operandsHolder.operands().map { it.valueClass() }}")
+        val operandsHolder = OperandsHolder.forOperands(operands.subList(0, operator.operandsCount).reversed().toList())
+        val (evaluator, suitability) = evaluatorProvider.findBestEvaluator(operator, operandsHolder, suitabilityProvider)
         println("$operator: $operandsHolder, ${evaluator.javaClass.simpleName}, ${suitability.typeConverters.map { it.javaClass.simpleName }}")
+        evaluator as Evaluator<Any>
         val result = when (evaluator) {
             is IdentityEvaluator -> {
                 val f = operands.first()
-                NamedVariable("compiledVar", { null }, { f.valueClass() })
+                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { f.valueClass() as Class<Any> })
             }
             is CommaEvaluator -> {
                 evaluator.evaluate(operandsHolder, suitabilityProvider)
             }
             else -> {
-                NamedVariable("compiledVar", { null }, { evaluator.resultClass() })
+                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { evaluator.resultClass() })
             }
         }
         for (i in 0 until operator.operandsCount) {
             operands.removeFirst()
         }
         operands.addFirst(result)
-        tasks.add(EvaluationTask(operator.operandsCount, evaluator as Evaluator<Any>, suitability.typeConverters))
+        tasks.add(EvaluationTask(operator.operandsCount, evaluator, suitability.typeConverters))
     }
 
 }
