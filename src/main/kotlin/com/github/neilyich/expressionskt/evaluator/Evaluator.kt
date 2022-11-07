@@ -11,5 +11,5 @@ sealed interface Evaluator<Result> {
 
     fun suitabilityFor(operandsHolder: OperandsHolder, evaluationSuitabilityProvider: EvaluationSuitabilityProvider): EvaluationSuitability
 
-    fun resultClass(): Class<Result>
+    fun resultClass(argClasses: List<Class<Any>>): Class<Result>
 }

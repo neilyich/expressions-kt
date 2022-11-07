@@ -13,7 +13,7 @@ abstract class UnaryNumberEvaluator: UnaryValueEvaluator<Number, Number>(Number:
         return evaluateBigDecimal(arg.decimal())
     }
 
-    override fun resultClass(): Class<Number> = Number::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<Number> = Number::class.java
 
     abstract fun evaluateBigInteger(arg: BigInteger): Number
     abstract fun evaluateBigDecimal(arg: BigDecimal): Number

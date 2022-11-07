@@ -13,5 +13,5 @@ object MinEvaluator : FunctionValuesEvaluator<Number, Number>() {
     }
 
     override fun supportedArgumentsCount(): Int = -1
-    override fun resultClass(): Class<Number> = Number::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<Number> = Number::class.java
 }

@@ -12,6 +12,9 @@ open class SimpleOperandsHolder(private val operands: List<Operand<*>>) : Operan
     override fun operandsCount(): Int = operands.size
 
     override fun getClass(i: Int): Class<*> = operands[i].valueClass()
+    override fun classes(): List<Class<*>> {
+        return operands.map { it.valueClass() }
+    }
 
     override fun operands(): List<Operand<*>> {
         return operands

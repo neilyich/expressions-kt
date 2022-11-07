@@ -13,7 +13,7 @@ abstract class BinaryNumbersEvaluator : BinaryValuesEvaluator<Number, Number, Nu
         return evaluateBigDecimal(left.decimal(), right.decimal())
     }
 
-    override fun resultClass(): Class<Number> = Number::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<Number> = Number::class.java
 
     abstract fun evaluateBigInteger(left: BigInteger, right: BigInteger): Number
     abstract fun evaluateBigDecimal(left: BigDecimal, right: BigDecimal): Number

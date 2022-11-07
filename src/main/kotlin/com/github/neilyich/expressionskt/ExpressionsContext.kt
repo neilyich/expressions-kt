@@ -12,6 +12,10 @@ import com.github.neilyich.expressionskt.expression.compiler.CompiledExpression
 import com.github.neilyich.expressionskt.expression.compiler.ExpressionCompiler
 import com.github.neilyich.expressionskt.expression.evaluator.ExpressionEvaluator
 import com.github.neilyich.expressionskt.expression.evaluator.provider.ComparingEvaluatorProvider
+import com.github.neilyich.expressionskt.modules.ExpressionsModule
+import com.github.neilyich.expressionskt.modules.LogicalModule
+import com.github.neilyich.expressionskt.modules.MathModule
+import com.github.neilyich.expressionskt.modules.SpecialSymbolsModule
 import com.github.neilyich.expressionskt.parser.ExpressionParser
 import com.github.neilyich.expressionskt.token.*
 import com.github.neilyich.expressionskt.token.operator.evaluators.CommaEvaluator
@@ -20,6 +24,19 @@ import com.github.neilyich.expressionskt.token.operator.impl.functions.*
 import com.github.neilyich.expressionskt.token.operator.impl.operators.*
 
 interface ExpressionsContext {
+
+    fun register(module: ExpressionsModule) {
+        module.operatorsEvaluators().forEach { entry ->
+            entry.value.forEach {
+                register(entry.key, it)
+            }
+        }
+        module.typeConverters().forEach {
+            register(it as TypeConverter<Any, Any>)
+        }
+    }
+
+    fun variables(): Map<String, *>
 
     fun register(operator: Operator, evaluator: Evaluator<*>)
 
@@ -49,36 +66,19 @@ interface ExpressionsContext {
 
     fun evaluate(expr: String) = evaluate(expr, Any::class.java)
 
-    fun createCompiler(): ExpressionCompiler
+    fun compiler(): ExpressionCompiler
 
-    fun compile(expr: String): CompiledExpression = createCompiler().compile(parse(expr))
+    fun compile(expr: String): CompiledExpression = compiler().compile(parse(expr))
 
     companion object {
         @JvmStatic
         fun createDefault(): ExpressionsContext {
             val context = ExpressionsContextImpl(TypeConvertingEvaluationSuitabilityProvider(), ComparingEvaluatorProvider())
 
-            context.register(Comma, CommaEvaluator)
-            context.register(OpenBracket, IdentityEvaluator)
-            context.register(CloseBracket, IdentityEvaluator)
+            context.register(SpecialSymbolsModule())
 
-            context.register(Plus, PlusEvaluator)
-            context.register(Minus, MinusEvaluator)
-            context.register(Mult, MultEvaluator)
-            context.register(Div, DivEvaluator)
-            context.register(Pow, PowEvaluator)
-            context.register(UnaryMinus, UnaryMinusEvaluator)
-            context.register(Factorial, FactorialEvaluator)
-
-            context.register(Min, MinEvaluator)
-            context.register(Max, MaxEvaluator)
-
-            context.register(NumberToBigIntegerConverter)
-            context.register(NumberToBigDecimalConverter)
-
-            context.register(Cos, CosEvaluator)
-            context.register(Sin, SinEvaluator)
-            context.register(Tan, TanEvaluator)
+            context.register(MathModule())
+            context.register(LogicalModule())
 
             return context
         }

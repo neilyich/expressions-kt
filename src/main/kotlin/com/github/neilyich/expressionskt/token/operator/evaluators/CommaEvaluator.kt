@@ -15,5 +15,5 @@ object CommaEvaluator : BinaryEvaluator<List<*>, Any, List<*>>(List::class.javaO
 
     override fun isCommutative(): Boolean = false
 
-    override fun resultClass(): Class<List<*>> = List::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<List<*>> = List::class.java
 }

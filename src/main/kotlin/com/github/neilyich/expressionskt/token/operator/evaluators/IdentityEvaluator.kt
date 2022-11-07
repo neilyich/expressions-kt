@@ -1,7 +1,6 @@
 package com.github.neilyich.expressionskt.token.operator.evaluators
 
 import com.github.neilyich.expressionskt.evaluator.UnaryEvaluator
-import com.github.neilyich.expressionskt.token.Constant
 import com.github.neilyich.expressionskt.token.Operand
 
 object IdentityEvaluator : UnaryEvaluator<Any, Any>(Any::class.javaObjectType) {
@@ -9,7 +8,7 @@ object IdentityEvaluator : UnaryEvaluator<Any, Any>(Any::class.javaObjectType) {
         return operand
     }
 
-    override fun resultClass(): Class<Any> {
-        return Any::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<Any> {
+        return argClasses[0]
     }
 }

@@ -26,6 +26,10 @@ class TypeConvertingOperandsHolder(
         return delegate.getClass(i)
     }
 
+    override fun classes(): List<Class<*>> {
+        return delegate.classes()
+    }
+
     override fun operands(): List<Operand<*>> {
         return delegate.operands()
     }

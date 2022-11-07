@@ -13,7 +13,6 @@ import com.github.neilyich.expressionskt.expression.evaluator.provider.Evaluator
 import com.github.neilyich.expressionskt.token.*
 import com.github.neilyich.expressionskt.token.operator.evaluators.CommaEvaluator
 import com.github.neilyich.expressionskt.token.operator.evaluators.IdentityEvaluator
-import java.util.function.Supplier
 
 class SimpleExpressionCompiler(
     private val evaluatorProvider: EvaluatorProvider,
@@ -70,15 +69,15 @@ class SimpleExpressionCompiler(
         println("$operator: $operandsHolder, ${evaluator.javaClass.simpleName}, ${suitability.typeConverters.map { it.javaClass.simpleName }}")
         evaluator as Evaluator<Any>
         val result = when (evaluator) {
-            is IdentityEvaluator -> {
-                val f = operands.first()
-                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { f.valueClass() as Class<Any> })
-            }
+//            is IdentityEvaluator -> {
+//                val f = operands.first()
+//                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { f.valueClass() as Class<Any> })
+//            }
             is CommaEvaluator -> {
                 evaluator.evaluate(operandsHolder, suitabilityProvider)
             }
             else -> {
-                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { evaluator.resultClass() })
+                Variable({ evaluator.evaluate(operandsHolder, suitabilityProvider).value() }, { evaluator.resultClass(operandsHolder.classes() as List<Class<Any>>) })
             }
         }
         for (i in 0 until operator.operandsCount) {

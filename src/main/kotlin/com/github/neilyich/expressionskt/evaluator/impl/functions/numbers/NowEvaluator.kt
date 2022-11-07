@@ -9,5 +9,5 @@ object NowEvaluator: NoArgsValueEvaluator<BigInteger>() {
         return currentTimeMillis().toBigInteger()
     }
 
-    override fun resultClass(): Class<BigInteger> = BigInteger::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<BigInteger> = BigInteger::class.java
 }

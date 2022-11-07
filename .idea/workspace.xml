@@ -4,22 +4,53 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="294e56c3-4149-4337-8787-10f69fc1421c" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/DelegatingExpressionEvaluator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/provider/ComparingEvaluatorProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/provider/EvaluatorProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ExpectedTokensProvider.kt" afterDir="false" />
+    <list default="true" id="294e56c3-4149-4337-8787-10f69fc1421c" name="Changes" comment="remake expressions compiling">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/logical/IfElseEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/AndEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/EqualAnyEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/EqualComparableEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/GreaterEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/GreaterOrEqualEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/LessEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/LessOrEqualEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/NotEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/logical/OrEvaluator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/modules/ExpressionsModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/modules/LogicalModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/modules/MathModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/modules/SpecialSymbolsModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/functions/logical/IfElse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/And.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/Equal.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/Greater.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/GreaterOrEqual.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/Less.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/LessOrEqual.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/Not.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/impl/operators/logical/Or.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/utils/ClassUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/com/github/neilyich/expressionskt/ClassUtilsTests.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/Application.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContext.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContextImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/ExpressionsContextImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/CompiledExpression.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/CompiledExpression.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/Evaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/Evaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/EmptyOperandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/EmptyOperandsHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/OperandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/OperandsHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/SimpleOperandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/SimpleOperandsHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/TypeConvertingOperandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/args/TypeConvertingOperandsHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MathFunctionEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MathFunctionEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MaxEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MaxEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MinEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/MinEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/NowEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/functions/numbers/NowEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/BinaryNumbersEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/BinaryNumbersEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/UnaryNumberEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/evaluator/impl/operators/numbers/UnaryNumberEvaluator.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/SimpleExpressionCompiler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/compiler/SimpleExpressionCompiler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/CompiledExpressionEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/CompiledExpressionEvaluator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/SimpleExpressionEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/expression/evaluator/SimpleExpressionEvaluator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ParseState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/ValidatingParseState.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/SimpleExpressionParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/parser/SimpleExpressionParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Variable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/Variable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/OperatorPriorities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/OperatorPriorities.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/CommaEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/CommaEvaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/IdentityEvaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/neilyich/expressionskt/token/operator/evaluators/IdentityEvaluator.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +62,10 @@
       <list>
         <option value="Kotlin Data Class" />
         <option value="Kotlin File" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Sealed Interface" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -61,7 +92,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20220903_0003",
+    "com.google.cloudcode.ide_session_index": "20221107_0002",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -69,11 +100,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="com.github.neilyich.expressionskt.modules" />
       <recent name="com.github.neilyich.expressionskt.parser" />
       <recent name="com.github.neilyich.expressionskt.expression.validator" />
       <recent name="com.github.neilyich.expressionskt.expression.evaluator" />
       <recent name="com.github.neilyich.expressionskt.expression.evaluator.provider" />
-      <recent name="com.github.neilyich.expressionskt.token" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.github.neilyich.expressionskt.expression.compiler.task" />
@@ -94,6 +125,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.ApplicationKt" />
+        <item itemvalue="Kotlin.ApplicationKt" />
       </list>
     </recent_temporary>
   </component>
@@ -112,6 +144,12 @@
       <workItem from="1662025182314" duration="305000" />
       <workItem from="1662051520625" duration="1110000" />
       <workItem from="1662226549915" duration="9640000" />
+      <workItem from="1663349486186" duration="58000" />
+      <workItem from="1663349596780" duration="14403000" />
+      <workItem from="1663415525704" duration="1562000" />
+      <workItem from="1663528815535" duration="7000" />
+      <workItem from="1666013067405" duration="27000" />
+      <workItem from="1667842823559" duration="6774000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1662228060099</created>

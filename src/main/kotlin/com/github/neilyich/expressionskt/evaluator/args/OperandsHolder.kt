@@ -13,6 +13,8 @@ sealed interface OperandsHolder {
 
     fun getClass(i: Int): Class<*>
 
+    fun classes(): List<Class<*>>
+
     fun operands(): List<Operand<*>>
 
     companion object {
