@@ -14,6 +14,10 @@ object EmptyOperandsHolder : OperandsHolder {
         throw UnsupportedOperationException("operands holder is empty")
     }
 
+    override fun classes(): List<Class<*>> {
+        return emptyList()
+    }
+
     override fun operands(): List<Operand<out Any>> {
         return emptyList()
     }

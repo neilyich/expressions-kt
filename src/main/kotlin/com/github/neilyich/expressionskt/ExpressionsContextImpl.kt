@@ -46,6 +46,10 @@ class ExpressionsContextImpl(
         suitabilityProvider.register(typeConverter)
     }
 
+    override fun variables(): Map<String, *> {
+        return HashMap(variables.mapValues { it.value.value() })
+    }
+
     override fun <V : Any> registerVariable(name: String, valueClass: Class<in V>) {
         variables[name] = NamedVariable(name, { null }, { valueClass })
     }
@@ -66,5 +70,5 @@ class ExpressionsContextImpl(
 
     override fun parser(): ExpressionParser = parser
 
-    override fun createCompiler(): ExpressionCompiler = compiler
+    override fun compiler(): ExpressionCompiler = compiler
 }

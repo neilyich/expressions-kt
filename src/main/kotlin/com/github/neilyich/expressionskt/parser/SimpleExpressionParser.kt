@@ -65,11 +65,11 @@ class SimpleExpressionParser(private val operators: Set<Operator>, private val v
             }
         } else {
             var opStr = expr.substring(startIndex, endIndex)
-            var candidates = operators.filter { it.str == opStr }.filter { state.isTokenExpected(it) }.toSet()
-            while (endIndex < expr.length && candidates.size != 1 && (!expr[endIndex].isJavaIdentifierStart() && !expr[endIndex].isDigit())) {
+            var candidates = operators.filter { it.str.startsWith(opStr) }.filter { state.isTokenExpected(it) }.toSet()
+            while (endIndex < expr.length && (candidates.size != 1 || candidates.first().str != opStr) && (!expr[endIndex].isJavaIdentifierStart() && !expr[endIndex].isDigit())) {
                 endIndex++
                 opStr = expr.substring(startIndex, endIndex)
-                candidates = operators.filter { it.str != opStr }.filter { state.isTokenExpected(it) }.toSet()
+                candidates = operators.filter { it.str.startsWith(opStr) }.filter { state.isTokenExpected(it) }.toSet()
             }
             if (candidates.size == 1) {
                 token = candidates.first()

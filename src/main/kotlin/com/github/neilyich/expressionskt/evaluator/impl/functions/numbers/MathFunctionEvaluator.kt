@@ -7,5 +7,5 @@ abstract class MathFunctionEvaluator(private val function: (Double) -> Number): 
         return function.invoke(arg.toDouble())
     }
 
-    override fun resultClass(): Class<Number> = Number::class.java
+    override fun resultClass(argClasses: List<Class<Any>>): Class<Number> = Number::class.java
 }
