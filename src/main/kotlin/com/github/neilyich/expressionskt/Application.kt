@@ -79,6 +79,8 @@ fun main() {
         calc("Tsum$i", "Tn/(1-b)*(Nend$i^(1-b) - Nstart$i^(1-b))")
         calc("Tavg$i", "Tsum$i / (Nend$i - Nstart$i + 1)")
     }
+    calc("Tavg5", "120")
+    calc("Tsum5", "Tavg5 * 450")
     calc("b1", "(Nosv - Nend4) / Nosv")
     calc("b2", "(Tsum - (Tsum1 + Tsum2 + Tsum3 + Tsum4)) / Tsum")
     val Nmax = listOf(81, 243, 423, 654, 720)
@@ -89,7 +91,76 @@ fun main() {
         calc("difcpr$i", "difqpr$i / 2")
         calc("qprUpd$i", "qpr$i * (1 - difqpr$i)")
         calc("cpr$i", "cpri * (1 + difcpr$i)")
+
+        calc("difselfcost${i}", "0")
+        calc("Nyear$i", "qprUpd$i")
     }
+    calc("Nyear1", "81")
+    for (i in 4 .. 5) {
+        calc("Nmax$i", "${Nmax[i - 1]}")
+        calc("difqpr$i", "(Nmax$i - qpr$i) / Nmax$i")
+        calc("cpr${i}1", "cpri")
+        calc("difselfcost${i}1", "difqpr$i * kp")
+        calc("Nyear${i}1", "qpr$i")
+
+        calc("difgrowqpr$i", "(Nmax$i - qpr$i) / qpr$i")
+        calc("diffallcpr$i", "difgrowqpr$i / 2")
+        calc("cpr${i}2", "cpri * (1 - diffallcpr$i)")
+        calc("difselfcost${i}2", "0")
+        calc("Nyear${i}2", "Nmax$i")
+
+        calc("Nyear$i", "Nyear${i}1")
+    }
+
+
+    serVar("M", "8.965")
+    serVar("lh", "112")
+    serVar("alpha", "0.15")
+    serVar("beta", "0.30")
+    serVar("kc", "1.50")
+    serVar("kop", "0.25")
+    serVar("kvp", "0.05")
+
+    for (i in 1 .. 5) {
+        calc("L$i", "Tavg$i * lh / 1000")
+        calc("Savg$i", "( M + L$i*(1+kc+kop) + L$i*alpha + (L$i+L$i*alpha)*beta ) * (1+kvp)")
+        val postfixes = mutableListOf<String>()
+        if (i == 4 || i == 5) {
+            postfixes.add("1")
+            postfixes.add("2")
+        } else {
+            postfixes.add("")
+        }
+        for (p in postfixes) {
+            calc("Syear$i$p", "Savg$i * Nyear$i$p * (1+difselfcost$i$p)")
+            calc("Wyear$i$p", "cpr$i$p * Nyear$i$p")
+            calc("Pyear$i$p", "Wyear$i$p - Syear$i$p")
+        }
+    }
+    for (i in 1 .. 2) {
+        calc("credit$i", "Kb * (1 + p/100)^$i")
+    }
+
+    val Nplan = mutableListOf(81, 243, 423, 500, 450)
+    for (i in 1 until Nplan.size) {
+        Nplan[i] = Nplan[i] + Nplan[i - 1]
+    }
+    println(Nplan)
+    val NplanMN = listOf(1 to 81, 82 to 324, 325 to 747, 748 to 1247, 1248 to 1697)
+    for (i in 1..5) {
+        val Nm = NplanMN[i - 1].second
+        val Nn = NplanMN[i - 1].first
+        calc("Nplan$i", "Nyear$i")
+        calc("Tsum${i}1", "Tsum$i")
+        calc("Tplansum$i", "Tn/(1-b)*(($Nm)^(1-b) - ($Nn)^(1-b))")
+        calc("Tplanavg$i", "Tplansum$i / ($Nm - $Nn + 1)")
+        calc("Tplanavg${i}1", "Tplansum$i / (Nplan$i)")
+        calc("Cavg$i", "Tplansum$i / 1935")
+
+        calc("Fopcom$i", "lh / 1000 * Tplansum$i * (1 + alpha)")
+        calc("Foptar$i", "lh / 1000 * Tplansum$i")
+    }
+
 //    variables().forEach {
 //        println(it.key + " = " + it.value)
 //    }
@@ -97,6 +168,9 @@ fun main() {
     calcedVars.forEach {
         println(it.key + " = " + it.value)
     }
+
+    println(evaluate("6077-385"))
+
     if (true) return
 
 
